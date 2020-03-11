@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" android:id="@+id/mainActivity"
+        android:icon="@drawable/logo">
+
+
+    <Button
+            android:id="@+id/start3x3gameButton"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="#fef9e7"
+            android:text="START 3X3 GAME"
+            app:layout_constraintBottom_toTopOf="@+id/start5x5gameButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+            android:id="@+id/start5x5gameButton"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#fef9e7"
+            android:text="START 5X5 GAME"
+            app:layout_constraintBottom_toTopOf="@+id/start7x7gameButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start3x3gameButton" />
+
+    <Button
+            android:id="@+id/start7x7gameButton"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#fef9e7"
+            android:text="START 7X7 GAME"
+            app:layout_constraintBottom_toTopOf="@+id/startCustomGameButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start5x5gameButton" />
+
+    <Button
+            android:id="@+id/startCustomGameButton"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="#fef9e7"
+            android:text="CUSTOM SIZE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start7x7gameButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>
