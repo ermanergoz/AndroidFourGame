@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.erman.fourgame.home.ui.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:icon="@drawable/logo"
+            tools:context=".home.ui.HomeActivity">
+
+
+        <Button
+                android:id="@+id/start3x3gameButton"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{() -> viewModel.on3x3GameClicked()}"
+                android:text="@string/start_3x3_game"
+                app:layout_constraintBottom_toTopOf="@+id/start5x5gameButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+                android:id="@+id/start5x5gameButton"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{() -> viewModel.on5x5GameClicked()}"
+                android:text="@string/start_5x5_game"
+                app:layout_constraintBottom_toTopOf="@+id/start7x7gameButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/start3x3gameButton" />
+
+        <Button
+                android:id="@+id/start7x7gameButton"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{() -> viewModel.on7x7GameClicked()}"
+                android:text="@string/start_7x7_game"
+                app:layout_constraintBottom_toTopOf="@+id/startCustomGameButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/start5x5gameButton" />
+
+        <Button
+                android:id="@+id/startCustomGameButton"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:onClick="@{() -> viewModel.onCustomGameClicked()}"
+                android:text="@string/custom_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/start7x7gameButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
