@@ -1,15 +1,11 @@
 package com.erman.fourgame.home.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import java.lang.Exception
 
 class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     var size = 0
@@ -17,6 +13,7 @@ class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     private var cellHeight: Int = 0
     private val gridPaint: Paint = Paint()
     private val textPaint: Paint = Paint()
+    var gridCells: MutableList<MutableList<Int>> = mutableListOf(mutableListOf())
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -64,27 +61,13 @@ class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
             for (j in 0 until size) {
                 canvas.drawText(
-                    "0", (((i * cellWidth) + ((i + 1) * cellWidth)) / 2).toFloat(),
+                    gridCells[i][j].toString(),
+                    (((i * cellWidth) + ((i + 1) * cellWidth)) / 2).toFloat(),
                     ((((j * cellHeight) + ((j + 1) * cellHeight)) / 2) + (cellHeight / 8)).toFloat(),
                     textPaint
                 )
             }
         }
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            try {
-                val column = (event.x / cellWidth).toInt()
-                val row = (event.y / cellHeight).toInt()
-                Log.e("Clicked on", "$column, $row")
-                invalidate()
-            } catch (err: Exception) {
-                Log.e("BoardView onTouchEvent", err.toString())
-            }
-        }
-        return true
     }
 
     init {

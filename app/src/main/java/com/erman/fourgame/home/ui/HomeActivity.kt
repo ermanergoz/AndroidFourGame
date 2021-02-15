@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.erman.fourgame.KEY_GAME_SIZE
+import com.erman.fourgame.utils.KEY_GAME_SIZE
 import com.erman.fourgame.R
 import com.erman.fourgame.databinding.ActivityHomeBinding
 import com.erman.fourgame.game.ui.GameActivity
