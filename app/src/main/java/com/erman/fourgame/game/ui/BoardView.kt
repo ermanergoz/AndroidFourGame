@@ -1,10 +1,12 @@
-package com.erman.fourgame.home.ui
+package com.erman.fourgame.game.ui
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import com.erman.fourgame.game.model.GridCell
 
 class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     var size = 0
@@ -12,7 +14,9 @@ class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     private var cellHeight: Int = 0
     private val gridPaint: Paint = Paint()
     private val textPaint: Paint = Paint()
-    var gridCells: MutableList<MutableList<Int>> = mutableListOf(mutableListOf())
+    private val playerPaint: Paint = Paint()
+    private val opponentPaint: Paint = Paint()
+    var gridCells: MutableList<MutableList<GridCell>> = mutableListOf(mutableListOf())
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -49,17 +53,40 @@ class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
     }
 
-    private fun drawCellText(canvas: Canvas) {
+    private fun drawDeadCell(canvas: Canvas, column: Int, row: Int) {
+        gridCells[column][row].isPlayersScore?.let { isPlayersScore ->
+            if (isPlayersScore) {
+                canvas.drawRect(
+                    (column * cellWidth).toFloat(), (row * cellHeight).toFloat(),
+                    ((column + 1) * cellWidth).toFloat(), ((row + 1) * cellHeight).toFloat(),
+                    playerPaint
+                )
+            } else {
+                canvas.drawRect(
+                    (column * cellWidth).toFloat(), (row * cellHeight).toFloat(),
+                    ((column + 1) * cellWidth).toFloat(), ((row + 1) * cellHeight).toFloat(),
+                    opponentPaint
+                )
+            }
+        }
+    }
+
+    private fun drawCellText(canvas: Canvas, column: Int, row: Int) {
+        canvas.drawText(
+            gridCells[column][row].gridTextNumber.toString(),
+            (((column * cellWidth) + ((column + 1) * cellWidth)) / 2).toFloat(),
+            ((((row * cellHeight) + ((row + 1) * cellHeight)) / 2) + (cellHeight / 8)).toFloat(),
+            textPaint
+        )
+    }
+
+    private fun drawCellContents(canvas: Canvas) {
         textPaint.textSize = calculateFontSize()
 
         for (column in 0 until size) {
             for (row in 0 until size) {
-                canvas.drawText(
-                    gridCells[column][row].toString(),
-                    (((column * cellWidth) + ((column + 1) * cellWidth)) / 2).toFloat(),
-                    ((((row * cellHeight) + ((row + 1) * cellHeight)) / 2) + (cellHeight / 8)).toFloat(),
-                    textPaint
-                )
+                drawDeadCell(canvas, column, row)
+                drawCellText(canvas, column, row)
             }
         }
     }
@@ -68,13 +95,17 @@ class BoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         if (size == 0) return
 
         drawGrid(canvas)
-        drawCellText(canvas)
+        drawCellContents(canvas)
     }
 
     init {
         context?.let {
-            gridPaint.style = Paint.Style.FILL_AND_STROKE;
-            textPaint.style = Paint.Style.FILL_AND_STROKE;
+            gridPaint.style = Paint.Style.FILL_AND_STROKE
+            textPaint.style = Paint.Style.FILL_AND_STROKE
+            playerPaint.color = Color.BLUE
+            playerPaint.style = Paint.Style.FILL_AND_STROKE
+            opponentPaint.color = Color.RED
+            playerPaint.style = Paint.Style.FILL_AND_STROKE
             textPaint.textAlign = Paint.Align.CENTER
             gridPaint.strokeWidth = 10F
         }

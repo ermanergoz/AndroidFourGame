@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.erman.fourgame.utils.KEY_GAME_SIZE
 import com.erman.fourgame.R
 import com.erman.fourgame.databinding.ActivityGameBinding
+import com.erman.fourgame.dialog.GameOverDialog
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.lang.Exception
@@ -35,5 +37,28 @@ class GameActivity : AppCompatActivity() {
             }
             true
         }
+
+        //If ObserveForever is used in the ViewModel, ViewModel will no longer be lifecycle aware.
+        //The code below is a workaround for that problem.
+        viewModel.isPlayersTurn.observe(this, Observer {
+            if (it) binding.gameBoard.isClickable = true
+            else {
+                binding.gameBoard.isClickable = false
+                viewModel.opponentsTurn()
+            }
+        })
+
+        viewModel.isGameOver.observe(this, Observer {
+            if (it) GameOverDialog(viewModel).show(supportFragmentManager, "")
+        })
+
+        viewModel.isReset.observe(this, Observer {
+            binding.gameBoard.invalidate()
+            binding.gameBoard.isClickable = true
+        })
+
+        viewModel.isQuit.observe(this, Observer {
+            if (it) finish()
+        })
     }
 }

@@ -4,4 +4,9 @@
     <string name="start_5x5_game">Start 5X5 Game</string>
     <string name="start_7x7_game">Start 7X7 Game</string>
     <string name="custom_size">Custom Size</string>
+    <string name="restart">Restart</string>
+    <string name="quit">Quit</string>
+    <string name="game_over">Game Over!</string>
+    <string name="your_score">Your score:</string>
+    <string name="score">Score:</string>
 </resources>
