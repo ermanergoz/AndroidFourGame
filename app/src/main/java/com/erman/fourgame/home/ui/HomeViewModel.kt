@@ -22,7 +22,15 @@ class HomeViewModel: ViewModel() {
         gameSize.value = 7
     }
 
-    fun onCustomGameClicked() {
+    fun on9x9GameClicked() {
+        gameSize.value = 9
+    }
 
+    fun on11x11GameClicked() {
+        gameSize.value = 11
+    }
+
+    fun on13x13GameClicked() {
+        gameSize.value = 13
     }
 }
