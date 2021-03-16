@@ -12,7 +12,7 @@ Android Four Game is a two-player game that is played on a board consists of nxn
 - Clone git repository:
 
 	```sh
-	git clone https://github.com/ermanergoz/USurf.git
+	git clone https://github.com/ermanergoz/AndroidFourGame.git
 	```
 
 - Import the project into Android Studio:
